@@ -1,21 +1,24 @@
-function createDashboard(wallet) {
+function createDashboard() {
+    var wallet = router.state.wallet || { name: 'Unknown', funds: 0, isTest: false };
+
     var dashboard = document.createElement('div');
     dashboard.className = 'dashboard';
 
     var title = document.createElement('h1');
     title.innerText = 'Wallet Dashboard';
     dashboard.appendChild(title);
-
+    
     var info = document.createElement('div');
     info.className = 'wallet-info';
     dashboard.appendChild(info);
 
+    var userName = router.state.userProfile ? router.state.userProfile.name : 'Unknown'; // Get from router state
     var name = document.createElement('div');
-    name.innerHTML = `<strong>Name:</strong> <span>${wallet.name}</span>`;
+    name.innerHTML = `<strong>User:</strong> <span>${userName}</span>`; // Update based on router state
     info.appendChild(name);
 
     var funds = document.createElement('div');
-    funds.innerHTML = `<strong>Total Funds:</strong> <span>${wallet.totalFunds}</span>`;
+    funds.innerHTML = `<strong>Total Funds:</strong> <span>${wallet.funds}</span>`;
     info.appendChild(funds);
 
     var isTest = document.createElement('div');
@@ -33,11 +36,23 @@ function createDashboard(wallet) {
 
     return dashboard;
 }
-
 function fetchWallet() {
     $.get("/api/TradeBroker/wallet", function (wallet) {
         // First, create the dashboard with the fetched wallet data
+        console.log(wallet);
         const dashboard = createDashboard(wallet);
+
+        // Create and append the symbols dropdown from symbolsComponent
+        // This assumes that symbolsComponent has already been initialized and populated
+        const symbolsDropdown = createCustomDropdownContainer();
+        dashboard.appendChild(symbolsDropdown);
+        router.navigate('symbols');
+        console.log(symbolsDropdown);
+
+        // Fetch and populate symbols if not done yet
+        if (!router.state.trackedSymbols || !router.state.watchedSymbols) {
+            fetchAndPopulateSymbols();
+        }
 
         // Then, update the HTML content
         $('#app').html(dashboard);

@@ -94,3 +94,28 @@ body {
     text-align: center;
     cursor: pointer;
 }
+
+.watched-symbol {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+.custom-dropdown {
+    position: relative;
+}
+
+.dropdown-button {
+    /* Style as needed */
+}
+
+.dropdown-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    /* Style as needed */
+}
+
+    .dropdown-options.show {
+        display: block;
+    }

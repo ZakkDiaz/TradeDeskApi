@@ -23,6 +23,12 @@ function createLoginForm() {
 
     return form;
 }
+function fetchUserProfile(apiKey) {
+    return $.ajax({
+        url: '/api/Home', // replace with your API endpoint to get user profile
+        headers: { 'x-api-key': apiKey }
+    });
+}
 
 function attachLoginEvents() {
     $("#submitLogin").click(function () {
@@ -31,10 +37,20 @@ function attachLoginEvents() {
             $.ajaxSetup({
                 headers: { 'x-api-key': apiKey }
             });
-            router.navigate('dashboard');
+
+            // Fetch user profile and store it in the router's state
+            fetchUserProfile(apiKey).then(userProfile => {
+                router.setState({
+                    userProfile: userProfile
+                });
+                router.navigate('dashboard');
+            }).catch(err => {
+                console.error('Failed to fetch user profile:', err);
+            });
         }
     });
 }
+
 
 // Register the route
 router.register('login', createLoginForm, attachLoginEvents);

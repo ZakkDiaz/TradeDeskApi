@@ -2,13 +2,15 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
 using TradeDeskApi.Common.Authorization;
 using TradeDeskBroker;
+using TradeDeskData;
 using TradeDeskTop.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Configuration.AddJsonFile("appsettings.json");
-builder.Services.Configure<ApiKeyConfig>(builder.Configuration.GetSection(ApiKeyConfig.ConfigName));
+builder.Configuration.AddJsonFile("secrets.json");
+builder.Services.Configure<DatabaseConfig>(builder.Configuration.GetSection(DatabaseConfig.ConfigName));
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -46,6 +48,7 @@ builder.Services.AddAuthentication("ApiKeyAuth")
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<IApiKeyService, ApiKeyService>();
 builder.Services.AddSingleton<IBrokerageService,  BrokerageService>();
+builder.Services.AddSingleton<IFinancialRepository, FinancialRepository>();
 var app = builder.Build();
 
 app.UseStaticFiles();

@@ -1,28 +1,49 @@
-﻿using TradeDeskBroker.Models;
+﻿using TradeDeskData;
+using TradeDeskData.Entities;
 
 namespace TradeDeskBroker
 {
     public class BrokerageService : IBrokerageService
     {
-        private readonly Dictionary<string, Wallet> _wallets = new Dictionary<string, Wallet>();
-
-        public Wallet GetWallet(string name)
+        private readonly IFinancialRepository _repo;
+        public BrokerageService(IFinancialRepository repo)
         {
-            if (!_wallets.ContainsKey(name))
-                CreateWallet(name);
-            return _wallets[name];
+            _repo = repo;
         }
 
-        private void CreateWallet(string name)
+        public async Task<Wallet> GetWallet(int userId)
         {
-            _wallets.TryAdd(name, new Wallet() { Name = name, IsTest = true, TotalFunds = 0 });
+            return await _repo.GetWalletByUserIdAsync(userId);
         }
 
-        public void AddFunds(string name, decimal funds)
+        public async Task CreateWallet(int userId, bool isTest = true)
         {
-            var wallet = GetWallet(name);
-            wallet.TotalFunds += funds;
-            _wallets[name] = wallet;
+            await _repo.CreateWalletAsync(new Wallet() { UserProfileId = userId, IsTest = isTest, Funds = 0 });
+        }
+
+        public async Task AddFunds(int userId, int walletId, decimal funds)
+        {
+            await _repo.AddFundsToUserWalletAsync(userId, walletId, funds);
+        }
+
+        public async Task<IEnumerable<TrackedSymbol>> GetTrackedSymbolsAsync()
+        {
+            return await _repo.GetTrackedSymbolsAsync();
+        }
+
+        public async Task<IEnumerable<WatchedSymbol>> GetWatchedSymbols(int userId)
+        {
+            return await _repo.GetWatchedSymbolsByUserIdAsync(userId);
+        }
+
+        public async Task RemoveWatch(int userId, int symbolId)
+        {
+            await _repo.RemoveWatchAsync(userId, symbolId);
+        }
+
+        public async Task AddWatch(int userId, int symbolId)
+        {
+            await _repo.AddWatchAsync(userId, symbolId);
         }
     }
 }

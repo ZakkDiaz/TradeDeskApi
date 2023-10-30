@@ -1,6 +1,7 @@
 class Router {
     constructor() {
         this.routes = {};
+        this.state = {}; 
     }
 
     register(name, componentFunc, initFunc) {
@@ -18,6 +19,10 @@ class Router {
         } else {
             console.error(`Route ${name} not found`);
         }
+    }
+
+    setState(newState) {
+        this.state = { ...this.state, ...newState };
     }
 }
 

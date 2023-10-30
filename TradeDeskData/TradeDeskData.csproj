@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.15" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TradeDeskApi.Common\TradeDeskApi.Common.csproj" />
-    <ProjectReference Include="..\TradeDeskData\TradeDeskData.csproj" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
 </Project>

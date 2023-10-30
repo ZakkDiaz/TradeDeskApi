@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34219.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeDeskApi", "TradeDeskApi\TradeDeskApi.csproj", "{15B5DC14-925E-45F1-9438-4F294BB5F26E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeDeskApi", "TradeDeskApi\TradeDeskApi.csproj", "{15B5DC14-925E-45F1-9438-4F294BB5F26E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeDeskTop", "TradeDeskTop\TradeDeskTop.csproj", "{C2E72FBB-B968-48ED-A96D-7CE74DC9721E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeDeskTop", "TradeDeskTop\TradeDeskTop.csproj", "{C2E72FBB-B968-48ED-A96D-7CE74DC9721E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeDeskApi.Common", "TradeDeskApi.Common\TradeDeskApi.Common.csproj", "{94BE6651-628B-46EC-AF2C-195F4B2C9491}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeDeskApi.Common", "TradeDeskApi.Common\TradeDeskApi.Common.csproj", "{94BE6651-628B-46EC-AF2C-195F4B2C9491}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeDeskBroker", "TradeDeskBroker\TradeDeskBroker.csproj", "{2D2D29FF-3FA1-49EB-973A-64CBAC5D7AD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeDeskBroker", "TradeDeskBroker\TradeDeskBroker.csproj", "{2D2D29FF-3FA1-49EB-973A-64CBAC5D7AD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeDeskData", "TradeDeskData\TradeDeskData.csproj", "{36A6C51C-E326-4443-9CAD-AA3A7AD09660}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2D2D29FF-3FA1-49EB-973A-64CBAC5D7AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D2D29FF-3FA1-49EB-973A-64CBAC5D7AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D2D29FF-3FA1-49EB-973A-64CBAC5D7AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36A6C51C-E326-4443-9CAD-AA3A7AD09660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36A6C51C-E326-4443-9CAD-AA3A7AD09660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36A6C51C-E326-4443-9CAD-AA3A7AD09660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36A6C51C-E326-4443-9CAD-AA3A7AD09660}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

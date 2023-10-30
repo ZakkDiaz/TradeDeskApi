@@ -22,19 +22,20 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationS
         _apiKeyService = apiKeyService;
     }
 
-    protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+    protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         if (!Context.Request.Headers.TryGetValue(ApiKeyHeaderName, out var apiKey))
         {
-            return Task.FromResult(AuthenticateResult.Fail("API Key was not provided."));
+            return AuthenticateResult.Fail("API Key was not provided.");
         }
 
-        if (!_apiKeyService.ValidateApiKey(apiKey, out var claimsPrincipal))
+        var claim = await _apiKeyService.ValidateApiKey(apiKey);
+        if (claim == null)
         {
-            return Task.FromResult(AuthenticateResult.Fail("Invalid API Key."));
+            return AuthenticateResult.Fail("Invalid API Key.");
         }
 
-        var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
-        return Task.FromResult(AuthenticateResult.Success(ticket));
+        var ticket = new AuthenticationTicket(claim, Scheme.Name);
+        return AuthenticateResult.Success(ticket);
     }
 }

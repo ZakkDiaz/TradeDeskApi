@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TradeDeskBroker\TradeDeskBroker.csproj" />
+    <ProjectReference Include="..\TradeDeskData\TradeDeskData.csproj" />
     <ProjectReference Include="..\TradeDeskTop\TradeDeskTop.csproj" />
   </ItemGroup>
 

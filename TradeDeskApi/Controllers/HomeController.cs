@@ -8,9 +8,6 @@ namespace TradeDeskApi.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
-        {
-            return Ok(new UserProfile() {  Name = User.Identity.Name });
-        }
+        public IActionResult Index() => Ok(new UserProfile() { Name = User.Identity.Name, Id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "UserId").Value) });
     }
 }
