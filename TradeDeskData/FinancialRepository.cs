@@ -112,5 +112,36 @@ namespace TradeDeskData
                 return affectedRows > 0;
             });
         }
+        public Task<int> InsertDataStreamAsync(int tradeType, decimal price, long dealTime, decimal quantity, string eventType, string symbol, long eventTime)
+        {
+            return ExecuteAsync(async conn =>
+            {
+                string insertQuery = @"
+        INSERT INTO DataStream (TradeType, Price, DealTime, Quantity, EventType, Symbol, EventTime)
+        VALUES (@TradeType, @Price, @DealTime, @Quantity, @EventType, @Symbol, @EventTime);
+        SELECT CAST(SCOPE_IDENTITY() as int)";
+
+                var parameters = new
+                {
+                    TradeType = tradeType,
+                    Price = price,
+                    DealTime = dealTime,
+                    Quantity = quantity,
+                    EventType = eventType,
+                    Symbol = symbol,
+                    EventTime = eventTime
+                };
+
+                return await conn.QueryFirstOrDefaultAsync<int>(insertQuery, parameters);
+            });
+        }
+
+        public Task<IEnumerable<DataStream>> GetLastNRecordsForSymbolAsync(string symbol, int N)
+        {
+            return ExecuteAsync(conn => conn.QueryAsync<DataStream>(
+                "SELECT TOP (@N) * FROM DataStream WHERE Symbol = @Symbol ORDER BY DealTime DESC",
+                new { N, Symbol = symbol }
+            ));
+        }
     }
 }

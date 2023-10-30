@@ -22,5 +22,7 @@ namespace TradeDeskData
         Task<int> AddFundsToUserWalletAsync(int userId, int walletId, decimal amountToAdd);
         Task<bool> AddWatchAsync(int userProfileId, int trackedSymbolId);
         Task<bool> RemoveWatchAsync(int userProfileId, int trackedSymbolId);
+        Task<int> InsertDataStreamAsync(int tradeType, decimal price, long dealTime, decimal quantity, string eventType, string symbol, long eventTime);
+        Task<IEnumerable<DataStream>> GetLastNRecordsForSymbolAsync(string symbol, int N);
     }
 }

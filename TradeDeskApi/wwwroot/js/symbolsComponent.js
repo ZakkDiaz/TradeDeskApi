@@ -10,6 +10,12 @@ function populateCustomDropdown(trackedSymbols, watchedSymbols) {
         symbolText.innerText = symbolObj.symbol;
         optionDiv.appendChild(symbolText);
 
+        // Add onclick event to fetch latest trades when the symbol is clicked
+        symbolText.onclick = function () {
+            router.setState({ watchedSymbol: symbolObj.symbol });
+            fetchLatestTrades(symbolObj.symbol);
+        };
+
         const watchButton = document.createElement('button');
         watchButton.innerText = watchedSymbols.some(w => w.trackedSymbolId === symbolObj.id) ? '-' : '+';
         watchButton.onclick = function () {
@@ -40,6 +46,21 @@ function toggleWatch(trackedSymbolId) {
             console.error('Failed to toggle watch');
         }
     });
+}
+
+function fetchLatestTrades(symbol) {
+    $.get(`/api/data/latestTrades/${symbol}`)
+        .done(function (response) {
+            // Update the router state with the fetched data
+            router.setState({
+                latestTrades: response
+            });
+            // Navigate to the tradeChart component to display the data
+            router.navigate('tradeChart');
+        })
+        .fail(function () {
+            console.error(`Failed to fetch latest trades for ${symbol}`);
+        });
 }
 
 function fetchTrackedSymbols() {

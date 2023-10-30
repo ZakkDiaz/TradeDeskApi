@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeDeskBroker", "TradeDes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeDeskData", "TradeDeskData\TradeDeskData.csproj", "{36A6C51C-E326-4443-9CAD-AA3A7AD09660}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitService", "BitService\BitService.csproj", "{3D718101-B744-47C3-B94C-7972042BA17A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitServerClient", "BitServerClient\BitServerClient.csproj", "{7E951A89-A879-4B67-940D-4B3BFF6D57EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{36A6C51C-E326-4443-9CAD-AA3A7AD09660}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36A6C51C-E326-4443-9CAD-AA3A7AD09660}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36A6C51C-E326-4443-9CAD-AA3A7AD09660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D718101-B744-47C3-B94C-7972042BA17A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D718101-B744-47C3-B94C-7972042BA17A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D718101-B744-47C3-B94C-7972042BA17A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D718101-B744-47C3-B94C-7972042BA17A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E951A89-A879-4B67-940D-4B3BFF6D57EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E951A89-A879-4B67-940D-4B3BFF6D57EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E951A89-A879-4B67-940D-4B3BFF6D57EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E951A89-A879-4B67-940D-4B3BFF6D57EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
