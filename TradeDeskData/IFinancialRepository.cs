@@ -12,6 +12,7 @@ namespace TradeDeskData
         Task<IEnumerable<UserProfile>> GetUserProfilesAsync();
         Task<UserProfile> GetUserProfileByIdAsync(int id);
         Task<UserProfile> GetUserProfileByKeyAsync(string passkey);
+        Task<string> GetUserKeyByIdAsync(int id);
         Task<int> CreateUserProfileAsync(UserProfile userProfile);
         Task<IEnumerable<TrackedSymbol>> GetTrackedSymbolsAsync();
         Task<IEnumerable<WatchedSymbol>> GetWatchedSymbolsByUserIdAsync(int userId);
@@ -24,5 +25,9 @@ namespace TradeDeskData
         Task<bool> RemoveWatchAsync(int userProfileId, int trackedSymbolId);
         Task<int> InsertDataStreamAsync(int tradeType, decimal price, long dealTime, decimal quantity, string eventType, string symbol, long eventTime);
         Task<IEnumerable<DataStream>> GetLastNRecordsForSymbolAsync(string symbol, int N);
+        Task<IEnumerable<DataStream>> GetRecordsAfterId(string symbol, int id);
+        Task<IEnumerable<DataStream>> GetRecordsAfterIdCount(string symbol, int id, int count);
+        Task<DataStream> GetClosestTradeAfter(string symbol, DateTime dateTime);
+        Task<IEnumerable<DataStream>> GetTradesBetween(string symbol, DateTime from, DateTime to);
     }
 }

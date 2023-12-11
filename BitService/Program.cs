@@ -26,10 +26,22 @@ var symbols = await _repo.GetTrackedSymbolsAsync();
 
 foreach (var symbol in symbols)
 {
-    await _socket.Connect(symbol.Symbol);
+    _socket.AddSymbol(symbol.Symbol);
 }
+
+await _socket.Connect();
 
 while (true)
 {
-    System.Threading.Thread.Sleep(100);
+    System.Threading.Thread.Sleep(5000);
+    var _newSymbols = await _repo.GetTrackedSymbolsAsync();
+    if(_newSymbols != null)
+    foreach (var _s in _newSymbols)
+    {
+        if (!symbols.Any(s => s.Symbol == _s.Symbol))
+        {
+            await _socket.AddSymbolAndConnect(_s.Symbol);
+            symbols = symbols.Append(_s);
+        }
+    }
 }

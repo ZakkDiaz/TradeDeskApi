@@ -26,9 +26,13 @@ namespace BitServerClient
                 _wsT.Start();
         }
 
-        public async Task Connect(string ticker)
+        public void AddSymbol(string ticker)
         {
             _tickers.Add(ticker);  // Add the ticker to the list
+        }
+
+        public async Task Connect()
+        {
             await connect();
         }
 
@@ -39,6 +43,7 @@ namespace BitServerClient
             await connect();  // Re-initialize the WebSocket connection
         }
 
+        List<string> tickers = new List<string>();
         private async Task connect()
         {
             try
@@ -51,7 +56,10 @@ namespace BitServerClient
 
                 foreach (var ticker in _tickers)
                 {
+                    if (tickers.Contains(ticker))
+                        continue;
                     await Send($"{{ \"method\":\"SUBSCRIPTION\", \"params\":[\"spot@public.deals.v3.api@{ticker.Replace("_", "")}\"] }}");
+                    tickers.Add(ticker);
                 }
             }
             catch (Exception ex)
@@ -101,6 +109,12 @@ namespace BitServerClient
 
                 Thread.Sleep(5);
             }
+        }
+
+        public async Task AddSymbolAndConnect(string symbol)
+        {
+            AddSymbol(symbol);
+            await connect();
         }
     }
 }

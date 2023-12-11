@@ -15,6 +15,7 @@ namespace BitService
         {
             var _repo = serviceProvider.GetRequiredService<IFinancialRepository>();
 
+            Deal lastDeal = null;
             void OnUpdate(string message)
             {
                 Console.WriteLine(message);
@@ -27,6 +28,13 @@ namespace BitService
                     if (streamMessage != null && streamMessage.d != null && streamMessage.d.deals != null)
                         foreach (var deal in streamMessage.d.deals)
                         {
+                            if (lastDeal == null)
+                                lastDeal = deal;
+                            else if (lastDeal.t == deal.t && lastDeal.v == deal.v && lastDeal.p == deal.p && lastDeal.S == deal.S)
+                                continue;
+                            else
+                                lastDeal = deal;
+
                             // Parse and validate the data
                             if (decimal.TryParse(deal.p, out decimal price) &&
                                 decimal.TryParse(deal.v, out decimal quantity))
@@ -63,7 +71,6 @@ namespace BitService
         {
             int openCount = 0;
             int closeCount = 0;
-            int lastBalancedCloseIndex = -1;
 
             StringBuilder sb = new StringBuilder();
 
@@ -87,14 +94,6 @@ namespace BitService
                 }
                 sb.Append(message[i]);
             }
-
-            //// Truncate the message at the last balanced closing bracket, if one exists
-            //if (lastBalancedCloseIndex != -1)
-            //{
-            //    var _m =  message.Substring(0, lastBalancedCloseIndex + 1);
-            //    return _m;
-            //}
-
             return message;
         }
     }

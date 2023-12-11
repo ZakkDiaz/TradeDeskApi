@@ -11,11 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeDeskApi.Common", "Trad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeDeskBroker", "TradeDeskBroker\TradeDeskBroker.csproj", "{2D2D29FF-3FA1-49EB-973A-64CBAC5D7AD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeDeskData", "TradeDeskData\TradeDeskData.csproj", "{36A6C51C-E326-4443-9CAD-AA3A7AD09660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeDeskData", "TradeDeskData\TradeDeskData.csproj", "{36A6C51C-E326-4443-9CAD-AA3A7AD09660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitService", "BitService\BitService.csproj", "{3D718101-B744-47C3-B94C-7972042BA17A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitService", "BitService\BitService.csproj", "{3D718101-B744-47C3-B94C-7972042BA17A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitServerClient", "BitServerClient\BitServerClient.csproj", "{7E951A89-A879-4B67-940D-4B3BFF6D57EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatGpt", "ChatGpt\ChatGpt.csproj", "{E90663DF-9DFB-4B10-951A-9C179CEF2D43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{7E951A89-A879-4B67-940D-4B3BFF6D57EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E951A89-A879-4B67-940D-4B3BFF6D57EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E951A89-A879-4B67-940D-4B3BFF6D57EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E90663DF-9DFB-4B10-951A-9C179CEF2D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E90663DF-9DFB-4B10-951A-9C179CEF2D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E90663DF-9DFB-4B10-951A-9C179CEF2D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E90663DF-9DFB-4B10-951A-9C179CEF2D43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

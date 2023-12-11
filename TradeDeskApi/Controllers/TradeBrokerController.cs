@@ -9,9 +9,11 @@ namespace TradeDeskApi.Controllers
     public class TradeBrokerController : BaseController
     {
         IBrokerageService _brokerageService;
-        public TradeBrokerController(IBrokerageService brokerageService)
+        ITradeContext _tradeContext;
+        public TradeBrokerController(IBrokerageService brokerageService, ITradeContext tradeContext)
         {
             _brokerageService = brokerageService;
+            _tradeContext = tradeContext;
         }
 
         [HttpGet]
@@ -57,6 +59,13 @@ namespace TradeDeskApi.Controllers
         {
             await _brokerageService.RemoveWatch(watch.UserProfileId, watch.TrackedSymbolId);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetTradesBetween/{symbol}/{startDate}/{endDate}")]
+        public async Task<IActionResult> GetTradesBetween(string symbol, DateTime startDate, DateTime endDate)
+        {
+            return Ok(await _tradeContext.GetTradesBetween(symbol.Replace("_", ""), startDate.ToUniversalTime(), endDate.ToUniversalTime()));
         }
     }
 }

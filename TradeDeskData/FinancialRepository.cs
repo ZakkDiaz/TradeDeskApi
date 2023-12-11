@@ -49,6 +49,11 @@ namespace TradeDeskData
             return ExecuteAsync(conn => conn.QueryFirstOrDefaultAsync<UserProfile>("SELECT * FROM UserProfiles WHERE Passkey = @Passkey", new { Passkey = passkey }));
         }
 
+        public Task<string> GetUserKeyByIdAsync(int id)
+        {
+            return ExecuteAsync(conn => conn.QueryFirstOrDefaultAsync<string>("SELECT TOP 1 PassKey FROM UserProfiles WHERE Id = @Id", new { Id = id }));
+        }
+
         public Task<int> CreateUserProfileAsync(UserProfile userProfile)
         {
             return ExecuteAsync(conn => conn.ExecuteAsync("INSERT INTO UserProfiles (Passkey, Name) VALUES (@Passkey, @Name)", userProfile));
@@ -139,9 +144,47 @@ namespace TradeDeskData
         public Task<IEnumerable<DataStream>> GetLastNRecordsForSymbolAsync(string symbol, int N)
         {
             return ExecuteAsync(conn => conn.QueryAsync<DataStream>(
-                "SELECT TOP (@N) * FROM DataStream WHERE Symbol = @Symbol ORDER BY DealTime DESC",
+                "SELECT TOP (@N) * FROM DataStream WHERE Symbol = @Symbol ORDER BY DealTime ASC",
                 new { N, Symbol = symbol }
             ));
         }
+
+        public Task<IEnumerable<DataStream>> GetRecordsAfterId(string symbol, int id)
+        {
+            return ExecuteAsync(conn => conn.QueryAsync<DataStream>(
+                "SELECT * FROM DataStream WHERE Symbol = @Symbol AND Id > @Id ORDER BY DealTime ASC",
+                new { Id = id, Symbol = symbol }
+            ));
+        }
+
+        public Task<IEnumerable<DataStream>> GetRecordsAfterIdCount(string symbol, int id, int count)
+        {
+            return ExecuteAsync(conn => conn.QueryAsync<DataStream>(
+                "SELECT TOP (@N) * FROM DataStream WHERE Symbol = @Symbol AND Id > @Id ORDER BY DealTime ASC",
+                new { N = count, Id = id, Symbol = symbol }
+            ));
+        }
+
+        public Task<DataStream> GetClosestTradeAfter(string symbol, DateTime dateTime)
+        {
+            long unixTimestamp = ((DateTimeOffset)dateTime).ToUnixTimeMilliseconds();
+
+            return ExecuteAsync(conn => conn.QueryFirstOrDefaultAsync<DataStream>(
+                "SELECT TOP 1 * FROM DataStream WHERE Symbol = @Symbol AND DealTime > @UnixTimestamp ORDER BY DealTime ASC",
+                new { Symbol = symbol, UnixTimestamp = unixTimestamp }
+            ));
+        }
+
+        public Task<IEnumerable<DataStream>> GetTradesBetween(string symbol, DateTime from, DateTime to)
+        {
+            long start = ((DateTimeOffset)from).ToUnixTimeMilliseconds();
+            long end = ((DateTimeOffset)to).ToUnixTimeMilliseconds();
+
+            return ExecuteAsync(conn => conn.QueryAsync<DataStream>(
+                "SELECT * FROM DataStream WHERE Symbol = @Symbol AND DealTime > @StartDate AND DealTime < @EndDate ORDER BY DealTime ASC",
+                new { Symbol = symbol, StartDate = start, EndDate = end }
+            ));
+        }
+
     }
 }

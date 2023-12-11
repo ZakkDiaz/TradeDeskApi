@@ -1,4 +1,5 @@
-﻿using TradeDeskData;
+﻿using TradeDeskBroker.Models;
+using TradeDeskData;
 using TradeDeskData.Entities;
 
 namespace TradeDeskBroker
@@ -9,6 +10,11 @@ namespace TradeDeskBroker
         public BrokerageService(IFinancialRepository repo)
         {
             _repo = repo;
+        }
+
+        public async Task SubmitTrade(Trade trade)
+        {
+
         }
 
         public async Task<Wallet> GetWallet(int userId)
