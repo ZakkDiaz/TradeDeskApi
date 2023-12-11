@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /TradeDeskApi/secrets.json
 /BitService/conn.txt
+/.vscode
