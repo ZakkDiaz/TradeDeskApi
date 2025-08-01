@@ -11,5 +11,6 @@ namespace TradeDeskBroker.Market
     public interface IMarketService
     {
         Task<IEnumerable<MarketTick>> GetDataInRange(string symbol, DateTime from, DateTime to);
+        Task<IEnumerable<TradeSignal>> GetTradesInRange(string symbol, DateTime from, DateTime to);
     }
 }

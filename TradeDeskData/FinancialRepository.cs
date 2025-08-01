@@ -185,6 +185,20 @@ namespace TradeDeskData
                 new { Symbol = symbol, StartDate = start, EndDate = end }
             ));
         }
+        public Task<IEnumerable<TradeSignalEntity>> GetTradeSignals(string symbol)
+        {
+            // Calculate the datetime representing 10 hours ago from the current time
+            var tenHoursAgo = DateTime.UtcNow.AddHours(-10);
+
+            return ExecuteAsync(conn => conn.QueryAsync<TradeSignalEntity>(
+                @"SELECT ts.* FROM TradeSignals ts
+          INNER JOIN TradeConfigurations tc ON ts.StrategyId = tc.Name
+          WHERE ts.Symbol = @Symbol AND ts.SignalTime >= @TenHoursAgo AND tc.Enabled = 1 
+          ORDER BY ts.SignalTime DESC",
+                new { Symbol = symbol, TenHoursAgo = tenHoursAgo }
+            ));
+        }
+
 
     }
 }

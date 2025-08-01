@@ -55,7 +55,7 @@ builder.Services.AddSingleton<IFinancialRepository, FinancialRepository>();
 builder.Services.AddSingleton<IMarketService, MarketService>();
 builder.Services.AddSingleton<IIndicatorFactory, IndicatorFactory>();
 builder.Services.AddSingleton<ITradeContext, TradeContext>();
-builder.Services.AddHostedService<MarketEvaluationService>();
+//builder.Services.AddHostedService<MarketEvaluationService>();
 
 builder.Services.AddSingleton(provider => {
     var factory = provider.GetRequiredService<IIndicatorFactory>();

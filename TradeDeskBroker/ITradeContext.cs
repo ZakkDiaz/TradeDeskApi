@@ -1,4 +1,5 @@
 ﻿using TradeDeskBroker.Models;
+using TradeDeskData.Entities;
 
 namespace TradeDeskBroker
 {

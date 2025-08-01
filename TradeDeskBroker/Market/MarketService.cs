@@ -142,6 +142,26 @@ namespace TradeDeskBroker.Market
 
             return rangesToQuery;
         }
+
+        public async Task<IEnumerable<TradeSignal>> GetTradesInRange(string symbol, DateTime from, DateTime to)
+        {
+            var signals = await _repo.GetTradeSignals(symbol);
+            if(signals == null)
+                return new List<TradeSignal>();
+            return signals.Select(s => new TradeSignal()
+            {
+                Confidence = s.Confidence,
+                SignalTime = s.SignalTime.ToLocalTime(),
+                IsBuy = s.IsBuy,
+                Price = s.Price,
+                RiskLevel = s.RiskLevel,
+                SignalWeight = s.SignalWeight,
+                Symbol = s.Symbol,
+                Leverage = s.Leverage,
+                StopLoss = s.StopLoss,
+                TakeProfit = s.TakeProfit
+            }).ToList();
+        }
     }
 }
 public static class MarketHelpers

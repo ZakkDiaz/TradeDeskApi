@@ -11,4 +11,5 @@
     public DateTime SignalTime { get; set; }
     public decimal StopLoss { get; set; }
     public decimal TakeProfit { get; set; }
+    public int Leverage { get; set; }
 }

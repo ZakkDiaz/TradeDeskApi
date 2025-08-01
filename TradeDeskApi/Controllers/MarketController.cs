@@ -21,5 +21,13 @@ namespace TradeDeskApi.Controllers
             return Ok(value);
         }
 
+        [HttpGet]
+        [Route("getSimulatedTrades/{symbol}/{from}/{to}")]
+        public async Task<IActionResult> GetSimulatedTrades(string symbol, DateTime from, DateTime to)
+        {
+            var value = await _marketService.GetTradesInRange(symbol.Replace("_", ""), from, to);
+            return Ok(value);
+        }
+
     }
 }

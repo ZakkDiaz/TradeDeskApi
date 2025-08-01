@@ -23,4 +23,16 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="deploy\NetWorker.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="deploy\NetWorker.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="deploy\run-deploy.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -29,5 +29,6 @@ namespace TradeDeskData
         Task<IEnumerable<DataStream>> GetRecordsAfterIdCount(string symbol, int id, int count);
         Task<DataStream> GetClosestTradeAfter(string symbol, DateTime dateTime);
         Task<IEnumerable<DataStream>> GetTradesBetween(string symbol, DateTime from, DateTime to);
+        Task<IEnumerable<TradeSignalEntity>> GetTradeSignals(string symbol);
     }
 }
